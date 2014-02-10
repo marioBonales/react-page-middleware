@@ -10,7 +10,7 @@
     "React": "git://github.com/facebook/react.git",
     "jstransform": "~2.0.1",
     "optimist": "0.6.0",
-    "node-haste": "git://github.com/facebook/node-haste.git",
+    "node-haste": "git://github.com/marioBonales/node-haste.git",
     "source-map": "~0.1.22",
     "convert-source-map": "0.2.6",
     "browser-builtins": "1.0.7"
@@ -23,6 +23,6 @@
   "license": "Apache-2.0",
   "repository" : {
     "type" : "git",
-    "url" : "http://github.com/facebook/react-page-middleware.git"
+    "url" : "http://github.com/marioBonales/react-page-middleware.git"
   }
 }
