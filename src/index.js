@@ -58,12 +58,14 @@ var validateBuildConfig = function(buildConfig) {
  * gzip plugin.
  */
 function send(type, res, str, mtime) {
-  res.setHeader('Date', new Date().toUTCString());
-  // Always assume we had compiled something that may have changed.
-  res.setHeader('Last-Modified', mtime || (new Date()).toUTCString());
-  // Would like to set the content length but it isn't clear how to do that
-  // efficiently with JS strings (string length is not byte length!).
-  res.setHeader('Content-Type', type);
+  if(res.setHeader){
+    res.setHeader('Date', new Date().toUTCString());
+    // Always assume we had compiled something that may have changed.
+    res.setHeader('Last-Modified', mtime || (new Date()).toUTCString());
+    // Would like to set the content length but it isn't clear how to do that
+    // efficiently with JS strings (string length is not byte length!).
+    res.setHeader('Content-Type', type);
+  }
   res.end(str);
 }
 
@@ -133,7 +135,7 @@ exports.compute = function(buildConfig) {
     }
     var mockRequestedURL = 'http://localhost:8080/' + requestedPath;
     exports.provide(buildConfig)(
-      {url: mockRequestedURL},               // req
+      {url: mockRequestedURL, method: 'GET'},               // req
       {end: onComputed},                     // res
       function(err) {                        // next()
         console.log('ERROR computing build:', err);
